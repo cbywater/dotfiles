@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Check for old .alacritty.yml
+      stat:
+        path: ~/.config/alacritty/alacritty.yml
+      register: old_yml
+
+    - name: Copy old .alacritty.yml
+      copy:
+        src: ~/.config/alacritty/alacritty.yml
+        dest: "{{ playbook_dir }}/../backups/alacritty.yml"
+      when: old_yml.stat.islnk == False
+
+    - name: Delete old .alacritty.yml
+      file:
+        dest: ~/.config/alacritty/alacritty.yml
+        state: absent
+      when: old_yml.stat.islnk == False
+
+    - name: Create .alacritty Symlink
+      file:
+        src: "{{ playbook_dir }}/alacritty.yml"
+        dest: ~/.config/alacritty/alacritty.yml
+        state: link
