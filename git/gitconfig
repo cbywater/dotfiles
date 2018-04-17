@@ -1,5 +1,12 @@
 [user]
-	email = chrisbywater@gmail.com
 	name = Chris Bywater
+	email = chrisbywater@gmail.com
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[color]
+	ui = auto
 [core]
+	editor = vim
 	autocrlf = input
+[merge]
+	tool = vimdiff

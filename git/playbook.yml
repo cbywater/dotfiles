@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Check for old .gitconfig
+      stat:
+        path: ~/.gitconfig
+      register: old_config
+
+    - name: Copy old .gitconfig
+      copy:
+        src: ~/.gitconfig
+        dest: "{{ playbook_dir }}/../backups/gitconfig"
+      when: (old_config.stat.exists == True) and (old_config.stat.islnk == False)
+
+    - name: Delete old .gitconfig
+      file:
+        dest: ~/.gitconfig
+        state: absent
+      when: (old_config.stat.exists == True) and (old_config.stat.islnk == False)
+
+    - name: Create .gitconfig Symlink
+      file:
+        src: "{{ playbook_dir }}/gitconfig"
+        dest: ~/.gitconfig
+        state: link

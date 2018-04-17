@@ -1,0 +1,80 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Check for old .tmux.conf
+      stat:
+        path: ~/.tmux.conf
+      register: old_rc
+
+    - name: Copy old .tmux.conf
+      copy:
+        src: ~/.tmux.conf
+        dest: "{{ playbook_dir }}/../backups/tmux.conf"
+      when: (old_rc.stat.exists == True) and (old_rc.stat.islnk == False)
+
+    - name: Delete old .tmux.conf
+      file:
+        dest: ~/.tmux.conf
+        state: absent
+      when: (old_rc.stat.exists == True) and (old_rc.stat.islnk == False)
+
+    - name: Create .tmux.conf Symlink
+      file:
+        src: "{{ playbook_dir }}/tmux.conf"
+        dest: ~/.tmux.conf
+        state: link
+
+    - name: Create .tmux folder
+      file:
+        path: "~/.tmux"
+        state: directory
+
+    # Statusline config file
+
+    - name: Check for old statusline
+      stat:
+        path: ~/.tmux/statusline
+      register: old_statusline
+
+    - name: Copy old statusline
+      copy:
+        src: ~/.tmux/statusline
+        dest: "{{ playbook_dir }}/../backups/statusline"
+      when: (old_statusline.stat.exists == True) and (old_statusline.stat.islnk == False)
+
+    - name: Delete old statusline
+      file:
+        dest: ~/.tmux/statusline
+        state: absent
+      when: (old_statusline.stat.exists == True) and (old_statusline.stat.islnk == False)
+
+    - name: Create statusline Symlink
+      file:
+        src: "{{ playbook_dir }}/statusline"
+        dest: ~/.tmux/statusline
+        state: link
+
+    # Scripts folder
+
+    - name: Check for old scripts
+      stat:
+        path: ~/.tmux/scripts
+      register: old_scripts
+
+    - name: Copy old scripts
+      copy:
+        src: ~/.tmux/scripts
+        dest: "{{ playbook_dir }}/../backups/scripts"
+      when: (old_scripts.stat.exists == True) and (old_scripts.stat.islnk == False)
+
+    - name: Delete old scripts
+      file:
+        dest: ~/.tmux/scripts
+        state: absent
+      when: (old_scripts.stat.exists == True) and (old_scripts.stat.islnk == False)
+
+    - name: Create scripts Symlink
+      file:
+        src: "{{ playbook_dir }}/scripts"
+        dest: ~/.tmux/scripts
+        state: link

@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Check for old .myclirc
+      stat:
+        path: ~/.myclirc
+      register: old_rc
+
+    - name: Copy old .myclirc
+      copy:
+        src: ~/.myclirc
+        dest: "{{ playbook_dir }}/../backups/myclirc"
+      when: (old_rc.stat.exists == True) and (old_rc.stat.islnk == False)
+
+    - name: Delete old .myclirc
+      file:
+        dest: ~/.myclirc
+        state: absent
+      when: (old_rc.stat.exists == True) and (old_rc.stat.islnk == False)
+
+    - name: Create .myclirc Symlink
+      file:
+        src: "{{ playbook_dir }}/myclirc"
+        dest: ~/.myclirc
+        state: link
+
