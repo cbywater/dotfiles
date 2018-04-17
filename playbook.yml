@@ -1,4 +1,11 @@
 ---
+- hosts: localhost
+  tasks:
+    - name: Creates backup directory
+      file:
+        path: "{{ playbook_dir }}/backups"
+        state: directory
+
 - import_playbook: ./alacritty/playbook.yml
 # - import_playbook: bash/playbook.yml
 # - import_playbook: fzf/playbook.yml

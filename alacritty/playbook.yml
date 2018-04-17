@@ -10,13 +10,18 @@
       copy:
         src: ~/.config/alacritty/alacritty.yml
         dest: "{{ playbook_dir }}/../backups/alacritty.yml"
-      when: old_yml.stat.islnk == False
+      when: (old_yml.stat.exists == True) and (old_yml.stat.islnk == False)
 
     - name: Delete old .alacritty.yml
       file:
         dest: ~/.config/alacritty/alacritty.yml
         state: absent
-      when: old_yml.stat.islnk == False
+      when: (old_yml.stat.exists == True) and (old_yml.stat.islnk == False)
+
+    - name: Creates alacritty config directory
+      file:
+        path: "~/.config/alacritty"
+        state: directory
 
     - name: Create .alacritty Symlink
       file:
