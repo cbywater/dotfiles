@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Check for old .fzf.bash
+      stat:
+        path: ~/.fzf.bash
+      register: old_file
+
+    - name: Copy old .fzf.bash
+      copy:
+        src: ~/.fzf.bash
+        dest: "{{ playbook_dir }}/../backups/fzf.bash"
+      when: (old_file.stat.exists == True) and (old_file.stat.islnk == False)
+
+    - name: Delete old .fzf.bash
+      file:
+        dest: ~/.fzf.bash
+        state: absent
+      when: (old_file.stat.exists == True) and (old_file.stat.islnk == False)
+
+    - name: Create .fzf.bash Symlink
+      file:
+        src: "{{ playbook_dir }}/fzf.bash"
+        dest: ~/.fzf.bash
+        state: link

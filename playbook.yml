@@ -8,7 +8,7 @@
 
 - import_playbook: alacritty/playbook.yml
 - import_playbook: bash/playbook.yml
-# - import_playbook: fzf/playbook.yml
+- import_playbook: fzf/playbook.yml
 # - import_playbook: git/playbook.yml
 # - import_playbook: mycli/playbook.yml
 # - import_playbook: tmux/playbook.yml
