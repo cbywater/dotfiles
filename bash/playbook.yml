@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Check for old .bashrc
+      stat:
+        path: ~/.bashrc
+      register: old_rc
+
+    - name: Copy old .bashrc
+      copy:
+        src: ~/.bashrc
+        dest: "{{ playbook_dir }}/../backups/bashrc"
+      when: (old_rc.stat.exists == True) and (old_rc.stat.islnk == False)
+
+    - name: Delete old .bashrc
+      file:
+        dest: ~/.bashrc
+        state: absent
+      when: (old_rc.stat.exists == True) and (old_rc.stat.islnk == False)
+
+    - name: Create .bashrc Symlink
+      file:
+        src: "{{ playbook_dir }}/bashrc"
+        dest: ~/.bashrc
+        state: link
