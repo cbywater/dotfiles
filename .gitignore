@@ -4,3 +4,5 @@ backups/
 *.swo
 
 *.retry
+
+vim/vim/.netrwhist

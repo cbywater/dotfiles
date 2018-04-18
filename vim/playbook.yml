@@ -45,6 +45,6 @@
 
     - name: Create .vim Symlink
       file:
-        src: "{{ playbook_dir }}/vim/vim"
+        src: "{{ playbook_dir }}/../vim/vim"
         dest: ~/.vim
         state: link
