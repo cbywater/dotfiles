@@ -1,0 +1,50 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Check for old .vimrc
+      stat:
+        path: ~/.vimrc
+      register: old_rc
+
+    - name: Copy old .vimrc
+      copy:
+        src: ~/.vimrc
+        dest: "{{ playbook_dir }}/../backups/vimrc"
+      when: (old_rc.stat.exists == True) and (old_rc.stat.islnk == False)
+
+    - name: Delete old .vimrc
+      file:
+        dest: ~/.vimrc
+        state: absent
+      when: (old_rc.stat.exists == True) and (old_rc.stat.islnk == False)
+
+    - name: Create .vimrc Symlink
+      file:
+        src: "{{ playbook_dir }}/vimrc"
+        dest: ~/.vimrc
+        state: link
+
+    # .vim folder
+
+    - name: Check for old .vim
+      stat:
+        path: ~/.vim
+      register: old_vim
+
+    - name: Copy old vim
+      copy:
+        src: ~/.vim
+        dest: "{{ playbook_dir }}/../backups/vim"
+      when: (old_vim.stat.exists == True) and (old_vim.stat.islnk == False)
+
+    - name: Delete old .vim
+      file:
+        dest: ~/.vim
+        state: absent
+      when: (old_vim.stat.exists == True) and (old_vim.stat.islnk == False)
+
+    - name: Create .vim Symlink
+      file:
+        src: "{{ playbook_dir }}/vim/vim"
+        dest: ~/.vim
+        state: link
