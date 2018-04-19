@@ -53,7 +53,7 @@ let g:syntastic_php_checkers=['php', 'phpcs']
 let g:syntastic_phpcs_exec='./core/vendor/bin/phpcs'
 let g:syntastic_php_phpcs_args='--standard=./ruleset.xml --warning-severity=10'
 
-let g:syntastic_mode='passive'
+let g:syntastic_mode_map = {"mode": "passive"}
 
 map <leader>psc :SyntasticCheck<CR>
 map <leader>pse :Errors<CR>
