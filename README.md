@@ -20,6 +20,12 @@ ansible-playbook -i inventory playbook.yml
 ## Vim Plugins
 Vim plugins are included using the vim8 native package loader (see `:help packages`).
 
+### Initialising Plugins
+If a new plugin gets added you'll need to initialise it
+```bash
+git submodule update --recursive --init
+```
+
 ### Adding a plugin
 ```bash
 cd vim/vim/pack/plugins/start

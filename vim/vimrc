@@ -124,7 +124,7 @@ map <leader>is :%retab<CR>
 map <leader>it :%retab!<CR>
 
 " php docblocks
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+let g:pdv_template_dir = $HOME ."/.vim/pack/plugins/start/pdv/templates_snip"
 map <leader>pd :call pdv#DocumentWithSnip()<CR>
 
 map <leader>pt :silent !phpctags -R<CR><CR>
