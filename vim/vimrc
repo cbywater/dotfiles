@@ -41,6 +41,10 @@ let g:gruvbox_termcolors=256
 let g:gruvbox_contrast_dark='hard'
 colors gruvbox
 
+" always show the sign column (jumps annoyingly otherwise)
+set signcolumn=yes
+let g:gruvbox_sign_column='none'
+
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='gruvbox'
