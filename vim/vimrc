@@ -55,14 +55,16 @@ let g:airline#extensions#tabline#tab_nr_type = 2
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
-" let g:syntastic_php_checkers=['php', 'phpcs']
-" let g:syntastic_phpcs_exec='./core/vendor/bin/phpcs'
-" let g:syntastic_php_phpcs_args='--standard=./ruleset.xml --warning-severity=10'
-" 
-" let g:syntastic_mode_map = {"mode": "passive"}
+" If we have phpcs in the project, use it
+if filereadable("./core/vendor/bin/phpcs")
+	let g:ale_php_phpcs_executable="./core/vendor/bin/phpcs"
+elseif filereadable("./vendor/bin/phpcs")
+	let g:ale_php_phpcs_executable="./vendor/bin/phpcs"
+elseif
+	let g:ale_php_phpcs_executable=""
+endif
 
-" map <leader>psc :SyntasticCheck<CR>
-" map <leader>pse :Errors<CR>
+let g:ale_php_phpcs_standard='./ruleset.xml'
 
 " space leader is the best leader
 let mapleader = " "
