@@ -35,16 +35,18 @@ syntax on
 autocmd Filetype php setlocal noexpandtab
 autocmd Filetype inc setlocal noexpandtab
 
+" Colourscheme settings
 set t_Co=256
 set background=dark
 let g:gruvbox_termcolors=256
 let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_sign_column='bg0'
 colors gruvbox
 
 " always show the sign column (jumps annoyingly otherwise)
 set signcolumn=yes
-let g:gruvbox_sign_column='none'
 
+" Statusline settings
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='gruvbox'
@@ -53,14 +55,14 @@ let g:airline#extensions#tabline#tab_nr_type = 2
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
-let g:syntastic_php_checkers=['php', 'phpcs']
-let g:syntastic_phpcs_exec='./core/vendor/bin/phpcs'
-let g:syntastic_php_phpcs_args='--standard=./ruleset.xml --warning-severity=10'
+" let g:syntastic_php_checkers=['php', 'phpcs']
+" let g:syntastic_phpcs_exec='./core/vendor/bin/phpcs'
+" let g:syntastic_php_phpcs_args='--standard=./ruleset.xml --warning-severity=10'
+" 
+" let g:syntastic_mode_map = {"mode": "passive"}
 
-let g:syntastic_mode_map = {"mode": "passive"}
-
-map <leader>psc :SyntasticCheck<CR>
-map <leader>pse :Errors<CR>
+" map <leader>psc :SyntasticCheck<CR>
+" map <leader>pse :Errors<CR>
 
 " space leader is the best leader
 let mapleader = " "
