@@ -37,6 +37,11 @@ autocmd Filetype inc setlocal noexpandtab
 
 " Colourscheme settings
 set t_Co=256
+
+execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+set termguicolors
+
 set background=dark
 let g:gruvbox_termcolors=256
 let g:gruvbox_contrast_dark='hard'
@@ -54,13 +59,14 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 2
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#tmuxline#enabled = 0
 
 " If we have phpcs in the project, use it
 if filereadable("./core/vendor/bin/phpcs")
 	let g:ale_php_phpcs_executable="./core/vendor/bin/phpcs"
 elseif filereadable("./vendor/bin/phpcs")
 	let g:ale_php_phpcs_executable="./vendor/bin/phpcs"
-elseif
+else
 	let g:ale_php_phpcs_executable=""
 endif
 
