@@ -48,3 +48,8 @@
         src: "{{ playbook_dir }}/../vim/vim"
         dest: ~/.vim
         state: link
+
+    # Vim plugins submodules
+
+    - name: Initialise submodules
+      command: git submodule update --recursive --init
