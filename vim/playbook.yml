@@ -53,3 +53,6 @@
 
     - name: Initialise submodules
       command: git submodule update --recursive --init
+
+    - name: Remove deleted submodules
+      command: git clean -ffd -- vim/vim/pack/plugins/start/*
