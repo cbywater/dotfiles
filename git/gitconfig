@@ -1,6 +1,6 @@
 [user]
 	name = Chris Bywater
-	email = chrisbywater@gmail.com
+	email = chrisb@dataplan.co.uk
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [color]

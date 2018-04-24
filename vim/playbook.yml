@@ -55,4 +55,4 @@
       command: git submodule update --recursive --init
 
     - name: Remove deleted submodules
-      command: git clean -ffd -- vim/vim/pack/plugins/start/*
+      command: git clean -ffd -- "{{ playbook_dir }}/vim/pack/plugins/start/*"
