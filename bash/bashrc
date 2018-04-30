@@ -134,6 +134,7 @@ fi
 setxkbmap gb
 
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 
 PATH="~/.composer/vendor/bin:$PATH"
 
