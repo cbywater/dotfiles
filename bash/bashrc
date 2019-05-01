@@ -103,7 +103,7 @@ complete -W "$(teamocil --list)" teamocil
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='exa -alhg --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -139,7 +139,7 @@ PATH="$HOME/.local/bin:$PATH"
 PATH="~/.composer/vendor/bin:$PATH"
 
 NPM_PACKAGES="/home/chris/.npm-packages"
-NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+# NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 PATH="$NPM_PACKAGES/bin:$PATH"
 # Unset manpath so we can inherit from /etc/manpath via the `manpath`
 # command
