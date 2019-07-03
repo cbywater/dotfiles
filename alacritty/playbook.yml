@@ -1,6 +1,17 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Ensure alacritty apt repo is present
+      apt_repository:
+        repo: 'ppa:mmstick76/alacritty'
+        state: present
+      become: yes
+
+    - name: Install alacritty
+      apt:
+        name: alacritty
+      become: yes
+
     - name: Check for old .alacritty.yml
       stat:
         path: ~/.config/alacritty/alacritty.yml

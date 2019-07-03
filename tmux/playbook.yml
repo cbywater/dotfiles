@@ -1,6 +1,11 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Install tmux
+      apt:
+        name: tmux
+      become: yes
+
     - name: Check for old .tmux.conf
       stat:
         path: ~/.tmux.conf

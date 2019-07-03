@@ -1,6 +1,17 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Ensure vim apt repo is present
+      apt_repository:
+        repo: 'ppa:jonathonf/vim'
+        state: present
+      become: yes
+
+    - name: Install vim
+      apt:
+        name: vim-gtk
+      become: yes
+
     - name: Check for old .vimrc
       stat:
         path: ~/.vimrc

@@ -1,6 +1,11 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Install mycli
+      apt:
+        name: mycli
+      become: yes
+
     - name: Check for old .myclirc
       stat:
         path: ~/.myclirc

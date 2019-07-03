@@ -1,6 +1,11 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Install fzf
+      apt:
+        name: fzf
+      become: yes
+
     - name: Check for old .fzf.bash
       stat:
         path: ~/.fzf.bash

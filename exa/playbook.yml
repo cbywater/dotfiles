@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install exa
+      apt:
+       name: exa 
+      become: yes
