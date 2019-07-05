@@ -1,0 +1,6 @@
+session_name: dotfiles
+windows:
+- window_name: vim
+  start_directory: ~/dotfiles
+  panes:
+    - vim .

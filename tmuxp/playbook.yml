@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install tmuxp
+      apt:
+        name: tmuxp
+      become: yes
+
+    - name: Ensure ~/.tmuxp directory exists
+      file:
+        path: "~/.tmuxp"
+        state: directory
+
+    - name: Check for old dotfiles.yml
+      stat:
+        path: ~/.tmuxp/configs/dotfiles.yml
+      register: old_dotfiles_yml
+
+    - name: Copy old dotfiles.yml
+      copy:
+        src: ~/.tmuxp/configs/dotfiles.yml
+        dest: "{{ playbook_dir }}/../backups/dotfiles.yml"
+      when: (old_dotfiles_yml.stat.exists == True) and (old_dotfiles_yml.stat.islnk == False)
+
+    - name: Create dotfiles.yml Symlink
+      file:
+        src: "{{ playbook_dir }}/configs/dotfiles.yml"
+        dest: ~/.tmuxp/dotfiles.yml
+        state: link

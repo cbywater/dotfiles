@@ -13,4 +13,5 @@
 - import_playbook: git/playbook.yml
 - import_playbook: mycli/playbook.yml
 - import_playbook: tmux/playbook.yml
+- import_playbook: tmuxp/playbook.yml
 - import_playbook: vim/playbook.yml
