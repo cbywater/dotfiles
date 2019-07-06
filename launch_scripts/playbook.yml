@@ -23,3 +23,49 @@
         src: "{{ playbook_dir }}/dotfiles"
         dest: ~/.launch_scripts/dotfiles
         state: link
+
+    - name: Check for old launch_scripts scripts
+      stat:
+        path: ~/.launch_scripts/launch_scripts
+      register: old_ls_script
+
+    - name: Copy old launch_scripts scripts
+      copy:
+        src: ~/.launch_scripts/launch_scripts
+        dest: "{{ playbook_dir }}/../backups/launch_scripts/launch_scripts"
+      when: (old_ls_script.stat.exists == True) and (old_ls_script.stat.islnk == False)
+
+    - name: Delete old launch_scripts scripts
+      file:
+        dest: ~/.launch_scripts/launch_scripts
+        state: absent
+      when: (old_ls_script.stat.exists == True) and (old_ls_script.stat.islnk == False)
+
+    - name: Create launch_scripts scripts Symlink
+      file:
+        src: "{{ playbook_dir }}/launch_scripts"
+        dest: ~/.launch_scripts/launch_scripts
+        state: link
+
+    - name: Check for old tmuxp scripts
+      stat:
+        path: ~/.launch_scripts/tmuxp
+      register: old_tmuxp_script
+
+    - name: Copy old tmuxp scripts
+      copy:
+        src: ~/.launch_scripts/tmuxp
+        dest: "{{ playbook_dir }}/../backups/launch_scripts/tmuxp"
+      when: (old_tmuxp_script.stat.exists == True) and (old_tmuxp_script.stat.islnk == False)
+
+    - name: Delete old tmuxp scripts
+      file:
+        dest: ~/.launch_scripts/tmuxp
+        state: absent
+      when: (old_tmuxp_script.stat.exists == True) and (old_tmuxp_script.stat.islnk == False)
+
+    - name: Create tmuxp scripts Symlink
+      file:
+        src: "{{ playbook_dir }}/tmuxp"
+        dest: ~/.launch_scripts/tmuxp
+        state: link

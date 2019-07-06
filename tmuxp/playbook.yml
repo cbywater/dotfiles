@@ -27,3 +27,37 @@
         src: "{{ playbook_dir }}/configs/dotfiles.yml"
         dest: ~/.tmuxp/dotfiles.yml
         state: link
+
+    - name: Check for old launch_scripts.yml
+      stat:
+        path: ~/.tmuxp/configs/launch_scripts.yml
+      register: old_launch_scripts_yml
+
+    - name: Copy old launch_scripts.yml
+      copy:
+        src: ~/.tmuxp/configs/launch_scripts.yml
+        dest: "{{ playbook_dir }}/../backups/launch_scripts.yml"
+      when: (old_launch_scripts_yml.stat.exists == True) and (old_launch_scripts_yml.stat.islnk == False)
+
+    - name: Create launch_scripts.yml Symlink
+      file:
+        src: "{{ playbook_dir }}/configs/launch_scripts.yml"
+        dest: ~/.tmuxp/launch_scripts.yml
+        state: link
+
+    - name: Check for old tmuxp.yml
+      stat:
+        path: ~/.tmuxp/configs/tmuxp.yml
+      register: old_tmuxp_yml
+
+    - name: Copy old tmuxp.yml
+      copy:
+        src: ~/.tmuxp/configs/tmuxp.yml
+        dest: "{{ playbook_dir }}/../backups/tmuxp.yml"
+      when: (old_tmuxp_yml.stat.exists == True) and (old_tmuxp_yml.stat.islnk == False)
+
+    - name: Create tmuxp.yml Symlink
+      file:
+        src: "{{ playbook_dir }}/configs/tmuxp.yml"
+        dest: ~/.tmuxp/tmuxp.yml
+        state: link
