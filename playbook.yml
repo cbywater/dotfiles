@@ -11,6 +11,7 @@
 - import_playbook: exa/playbook.yml
 - import_playbook: fzf/playbook.yml
 - import_playbook: git/playbook.yml
+- import_playbook: launch_scripts/playbook.yml
 - import_playbook: mycli/playbook.yml
 - import_playbook: tmux/playbook.yml
 - import_playbook: tmuxp/playbook.yml

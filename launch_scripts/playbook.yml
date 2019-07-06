@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Check for old dotfiles scripts
+      stat:
+        path: ~/.launch_scripts/dotfiles
+      register: old_dot_script
+
+    - name: Copy old dotfiles scripts
+      copy:
+        src: ~/.launch_scripts/dotfiles
+        dest: "{{ playbook_dir }}/../backups/launch_scripts/dotfiles"
+      when: (old_dot_script.stat.exists == True) and (old_dot_script.stat.islnk == False)
+
+    - name: Delete old dotfiles scripts
+      file:
+        dest: ~/.launch_scripts/dotfiles
+        state: absent
+      when: (old_dot_script.stat.exists == True) and (old_dot_script.stat.islnk == False)
+
+    - name: Create dotfiles scripts Symlink
+      file:
+        src: "{{ playbook_dir }}/dotfiles"
+        dest: ~/.launch_scripts/dotfiles
+        state: link
