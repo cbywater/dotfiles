@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "tmuxp scripts"
+
+~/.launch_scripts/check_tmux_session.sh "tmuxp"

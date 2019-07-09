@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "Dotfiles or something"
+
+~/.launch_scripts/check_tmux_session.sh "dotfiles"

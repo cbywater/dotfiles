@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "Script directories for tmux launcher"
+
+~/.launch_scripts/check_tmux_session.sh "Launch Scripts"
