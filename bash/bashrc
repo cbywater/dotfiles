@@ -19,9 +19,6 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# vi mode ftw
-set -o vi
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -38,19 +35,10 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# We want colors
-# export TERM=xterm-256color
-
-# set gruvbox colorscheme
-~/.vim/pack/plugins/start/gruvbox/gruvbox_256palette.sh
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
-
-export VISUAL=vim
-export EDITOR="$VISUAL"
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
@@ -96,9 +84,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# Teamocil autocompletion
-# complete -W "$(teamocil --list)" teamocil
-
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -131,19 +116,27 @@ if ! shopt -oq posix; then
   fi
 fi
 
-setxkbmap gb
+# vi mode ftw
+set -o vi
+
+# set gruvbox colorscheme
+~/.vim/pack/plugins/start/gruvbox/gruvbox_256palette.sh
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 
 PATH="~/.composer/vendor/bin:$PATH"
 
-NPM_PACKAGES="/home/chris/.npm-packages"
-# NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
 # Unset manpath so we can inherit from /etc/manpath via the `manpath`
 # command
 unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
