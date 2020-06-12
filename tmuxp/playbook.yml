@@ -13,13 +13,19 @@
 
     - name: Check for old dotfiles.yml
       stat:
-        path: ~/.tmuxp/configs/dotfiles.yml
+        path: ~/.tmuxp/dotfiles.yml
       register: old_dotfiles_yml
 
     - name: Copy old dotfiles.yml
       copy:
-        src: ~/.tmuxp/configs/dotfiles.yml
+        src: ~/.tmuxp/dotfiles.yml
         dest: "{{ playbook_dir }}/../backups/dotfiles.yml"
+      when: (old_dotfiles_yml.stat.exists == True) and (old_dotfiles_yml.stat.islnk == False)
+
+    - name: Delete old dotfiles.yml
+      file:
+        dest: ~/.tmuxp/dotfiles.yml
+        state: absent
       when: (old_dotfiles_yml.stat.exists == True) and (old_dotfiles_yml.stat.islnk == False)
 
     - name: Create dotfiles.yml Symlink
@@ -30,13 +36,19 @@
 
     - name: Check for old launch_scripts.yml
       stat:
-        path: ~/.tmuxp/configs/launch_scripts.yml
+        path: ~/.tmuxp/launch_scripts.yml
       register: old_launch_scripts_yml
 
     - name: Copy old launch_scripts.yml
       copy:
         src: ~/.tmuxp/configs/launch_scripts.yml
         dest: "{{ playbook_dir }}/../backups/launch_scripts.yml"
+      when: (old_launch_scripts_yml.stat.exists == True) and (old_launch_scripts_yml.stat.islnk == False)
+
+    - name: Delete old launch_scripts.yml
+      file:
+        dest: ~/.tmuxp/launch_scripts.yml
+        state: absent
       when: (old_launch_scripts_yml.stat.exists == True) and (old_launch_scripts_yml.stat.islnk == False)
 
     - name: Create launch_scripts.yml Symlink
@@ -47,13 +59,19 @@
 
     - name: Check for old tmuxp.yml
       stat:
-        path: ~/.tmuxp/configs/tmuxp.yml
+        path: ~/.tmuxp/tmuxp.yml
       register: old_tmuxp_yml
 
     - name: Copy old tmuxp.yml
       copy:
-        src: ~/.tmuxp/configs/tmuxp.yml
+        src: ~/.tmuxp/tmuxp.yml
         dest: "{{ playbook_dir }}/../backups/tmuxp.yml"
+      when: (old_tmuxp_yml.stat.exists == True) and (old_tmuxp_yml.stat.islnk == False)
+
+    - name: Delete old tmuxp.yml
+      file:
+        dest: ~/.tmuxp/tmuxp.yml
+        state: absent
       when: (old_tmuxp_yml.stat.exists == True) and (old_tmuxp_yml.stat.islnk == False)
 
     - name: Create tmuxp.yml Symlink

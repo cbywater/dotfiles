@@ -6,6 +6,11 @@
         dest: ~/.launch_scripts/check_tmux_session.sh
         state: absent
 
+    - name: Ensure ~/.launch_scripts directory exists
+      file:
+        path: "~/.launch_scripts"
+        state: directory
+
     - name: Create tmux checker scripts Symlink
       file:
         src: "{{ playbook_dir }}/check_tmux_session.sh"
