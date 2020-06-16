@@ -16,3 +16,4 @@
 - import_playbook: tmux/playbook.yml
 - import_playbook: tmuxp/playbook.yml
 - import_playbook: vim/playbook.yml
+- import_playbook: kubernetes/playbook.yml

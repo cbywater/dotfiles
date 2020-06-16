@@ -1,0 +1,50 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install prerequisites for k8s installation
+      apt:
+        name:
+          - apt-transport-https
+          - gnupg2
+      become: yes
+
+    - name: Add apt signing key for k8s
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+      become: yes
+
+    - name: Add apt repo for k8s
+      apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+        filename: kubernetes.list
+      become: yes
+
+    - name: Install kubectl
+      apt:
+        name: kubectl
+      become: yes
+
+    - name: Install minikube
+      apt:
+        deb: 'https://github.com/kubernetes/minikube/releases/download/v1.11.0/minikube_latest_amd64.deb'
+      become: yes
+
+    - name: Install KVM packages
+      apt:
+        name:
+          - qemu-kvm
+          - libvirt-daemon-system
+          - libvirt-clients
+          - bridge-utils
+      become: yes
+
+    - name: Add my user to the KVM group
+      user:
+        name: chris
+        groups:
+          - libvirt
+          - kvm
+        append: yes
+      become: yes
