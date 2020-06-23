@@ -4,7 +4,7 @@
 
     - name: Check for existing n installation
       stat:
-        path: ~/.n/bin/n
+        path: /home/chris/.n/bin/n
       register: old_n
 
     - name: Download n
@@ -12,7 +12,7 @@
         url: "https://raw.githubusercontent.com/tj/n/master/bin/n"
         mode: "755"
         dest: "/tmp/n"
-      when: (old_n.stat.exists == True)
+      when: (old_n.stat.exists == False)
 
     - name: Install node with bootstrapped n
       shell:
