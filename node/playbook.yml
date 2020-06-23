@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  tasks:
+
+    - name: Check for existing n installation
+      stat:
+        path: ~/.n/bin/n
+      register: old_n
+
+    - name: Download n
+      get_url:
+        url: "https://raw.githubusercontent.com/tj/n/master/bin/n"
+        mode: "755"
+        dest: "/tmp/n"
+      when: (old_n.stat.exists == True)
+
+    - name: Install node with bootstrapped n
+      shell:
+        cmd: "/tmp/n latest"
+        creates: "~/.n/bin/node"
+
+    - name: Remove bootstrapped n
+      file:
+        dest: "/tmp/n"
+        state: absent
+
+    - name:
+      npm:
+        name: n
+        global: yes
