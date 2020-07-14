@@ -10,6 +10,11 @@ sudo apt-add-repository ppa:ansible/ansible
 sudo apt-get update
 sudo apt-get install ansible
 ```
+## Ansible Role Requirements
+Some of the playbooks require third party ansible roles. To install use the following.
+```bash
+ansible-galaxy install -r requirements.yml
+```
 
 ## Running Playbook
 The Ansible playbook creates backups of existing config files, then creates symlinks to the files in this repo.

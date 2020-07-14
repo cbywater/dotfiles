@@ -48,3 +48,17 @@
           - kvm
         append: yes
       become: yes
+
+    - name: Add telepresence repo
+      import_role:
+        name: computology.packagecloud
+      vars:
+        repository: datawireio/telepresence
+        os: ubuntu
+        version: focal
+      become: yes
+
+    - name: Install telepresence
+      apt:
+        name: telepresence
+      become: yes
