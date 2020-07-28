@@ -1,6 +1,13 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Install apt packages
+      apt:
+        name:
+          - git
+          - git-crypt
+      become: yes
+
     - name: Check for old .gitconfig
       stat:
         path: ~/.gitconfig
