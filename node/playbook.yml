@@ -14,17 +14,25 @@
         dest: "/tmp/n"
       when: (old_n.stat.exists == False)
 
+    - name: Ensure /usr/local/n directory exists
+      file:
+        path: "/usr/local/n"
+        state: directory
+        owner: chris
+        group: chris
+      become: yes
+
     - name: Install node with bootstrapped n
       shell:
         cmd: "/tmp/n latest"
         creates: "~/.n/bin/node"
 
+    - name: Install n
+      npm:
+        name: n
+        global: yes
+
     - name: Remove bootstrapped n
       file:
         dest: "/tmp/n"
         state: absent
-
-    - name:
-      npm:
-        name: n
-        global: yes
