@@ -28,7 +28,7 @@
 
     - name: Install minikube
       apt:
-        deb: 'https://github.com/kubernetes/minikube/releases/download/v1.11.0/minikube_latest_amd64.deb'
+        deb: 'https://github.com/kubernetes/minikube/releases/download/v1.23.2/minikube_1.23.2-0_amd64.deb'
       become: yes
 
     - name: Install KVM packages
