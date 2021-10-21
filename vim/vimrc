@@ -162,3 +162,10 @@ vmap <leader>cC :w !xclip -i<CR>
 "function! CopyToClipboard(type)
 "	execute "w !xclip -selection -c -i"
 "endfunction
+
+" FZF search stuff
+nmap <leader>ff :Files<CR>
+nmap <leader>fc :Rg<CR>
+nmap <leader>fb :Buffers<CR>
+nmap <leader>fw :Windows<CR>
+nmap <leader>fg :Commits<CR>
